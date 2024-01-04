@@ -4,8 +4,8 @@
   "metadata" : {
     "annotations" : {
       "app.openshift.io/vcs-url" : "<<unknown>>",
-      "app.quarkus.io/commit-id" : "58dc8ed3d14eec66ff6366f71e7a8551c21a69b3",
-      "app.quarkus.io/build-timestamp" : "2023-12-18 - 14:12:19 +0000",
+      "app.quarkus.io/commit-id" : "5c7857fc5fb761c7a71d7ba310c2141a12509195",
+      "app.quarkus.io/build-timestamp" : "2024-01-04 - 14:13:40 +0000",
       "prometheus.io/scrape" : "true",
       "prometheus.io/path" : "/q/metrics",
       "prometheus.io/port" : "8080",
@@ -36,8 +36,8 @@
   "metadata" : {
     "annotations" : {
       "app.openshift.io/vcs-url" : "<<unknown>>",
-      "app.quarkus.io/commit-id" : "58dc8ed3d14eec66ff6366f71e7a8551c21a69b3",
-      "app.quarkus.io/build-timestamp" : "2023-12-18 - 14:12:19 +0000"
+      "app.quarkus.io/commit-id" : "5c7857fc5fb761c7a71d7ba310c2141a12509195",
+      "app.quarkus.io/build-timestamp" : "2024-01-04 - 14:13:40 +0000"
     },
     "labels" : {
       "app.kubernetes.io/name" : "expense-service",
@@ -66,8 +66,8 @@
   "metadata" : {
     "annotations" : {
       "app.openshift.io/vcs-url" : "<<unknown>>",
-      "app.quarkus.io/commit-id" : "58dc8ed3d14eec66ff6366f71e7a8551c21a69b3",
-      "app.quarkus.io/build-timestamp" : "2023-12-18 - 14:12:19 +0000"
+      "app.quarkus.io/commit-id" : "5c7857fc5fb761c7a71d7ba310c2141a12509195",
+      "app.quarkus.io/build-timestamp" : "2024-01-04 - 14:13:40 +0000"
     },
     "labels" : {
       "app.kubernetes.io/name" : "expense-service",
@@ -84,33 +84,28 @@
       }
     },
     "source" : {
-      "binary" : { }
+      "dockerfile" : "####\n# This Dockerfile is used in order to build a container that runs the Quarkus application in JVM mode\n#\n# Before building the container image run:\n#\n# ./mvnw package\n#\n# Then, build the image with:\n#\n# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/expense-service-jvm .\n#\n# Then run the container using:\n#\n# docker run -i --rm -p 8080:8080 quarkus/expense-service-jvm\n#\n# If you want to include the debug port into your docker image\n# you will have to expose the debug port (default 5005) like this :  EXPOSE 8080 5005\n#\n# Then run the container using :\n#\n# docker run -i --rm -p 8080:8080 quarkus/expense-service-jvm\n#\n# This image uses the `run-java.sh` script to run the application.\n# This scripts computes the command line to execute your Java application, and\n# includes memory/GC tuning.\n# You can configure the behavior using the following environment properties:\n# - JAVA_OPTS: JVM options passed to the `java` command (example: \"-verbose:class\")\n# - JAVA_OPTS_APPEND: User specified Java options to be appended to generated options\n#   in JAVA_OPTS (example: \"-Dsome.property=foo\")\n# - JAVA_MAX_MEM_RATIO: Is used when no `-Xmx` option is given in JAVA_OPTS. This is\n#   used to calculate a default maximal heap memory based on a containers restriction.\n#   If used in a container without any memory constraints for the container then this\n#   option has no effect. If there is a memory constraint then `-Xmx` is set to a ratio\n#   of the container available memory as set here. The default is `50` which means 50%\n#   of the available memory is used as an upper boundary. You can skip this mechanism by\n#   setting this value to `0` in which case no `-Xmx` option is added.\n# - JAVA_INITIAL_MEM_RATIO: Is used when no `-Xms` option is given in JAVA_OPTS. This\n#   is used to calculate a default initial heap memory based on the maximum heap memory.\n#   If used in a container without any memory constraints for the container then this\n#   option has no effect. If there is a memory constraint then `-Xms` is set to a ratio\n#   of the `-Xmx` memory as set here. The default is `25` which means 25% of the `-Xmx`\n#   is used as the initial heap size. You can skip this mechanism by setting this value\n#   to `0` in which case no `-Xms` option is added (example: \"25\")\n# - JAVA_MAX_INITIAL_MEM: Is used when no `-Xms` option is given in JAVA_OPTS.\n#   This is used to calculate the maximum value of the initial heap memory. If used in\n#   a container without any memory constraints for the container then this option has\n#   no effect. If there is a memory constraint then `-Xms` is limited to the value set\n#   here. The default is 4096MB which means the calculated value of `-Xms` never will\n#   be greater than 4096MB. The value of this variable is expressed in MB (example: \"4096\")\n# - JAVA_DIAGNOSTICS: Set this to get some diagnostics information to standard output\n#   when things are happening. This option, if set to true, will set\n#  `-XX:+UnlockDiagnosticVMOptions`. Disabled by default (example: \"true\").\n# - JAVA_DEBUG: If set remote debugging will be switched on. Disabled by default (example:\n#    true\").\n# - JAVA_DEBUG_PORT: Port used for remote debugging. Defaults to 5005 (example: \"8787\").\n# - CONTAINER_CORE_LIMIT: A calculated core limit as described in\n#   https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt. (example: \"2\")\n# - CONTAINER_MAX_MEMORY: Memory limit given to the container (example: \"1024\").\n# - GC_MIN_HEAP_FREE_RATIO: Minimum percentage of heap free after GC to avoid expansion.\n#   (example: \"20\")\n# - GC_MAX_HEAP_FREE_RATIO: Maximum percentage of heap free after GC to avoid shrinking.\n#   (example: \"40\")\n# - GC_TIME_RATIO: Specifies the ratio of the time spent outside the garbage collection.\n#   (example: \"4\")\n# - GC_ADAPTIVE_SIZE_POLICY_WEIGHT: The weighting given to the current GC time versus\n#   previous GC times. (example: \"90\")\n# - GC_METASPACE_SIZE: The initial metaspace size. (example: \"20\")\n# - GC_MAX_METASPACE_SIZE: The maximum metaspace size. (example: \"100\")\n# - GC_CONTAINER_OPTIONS: Specify Java GC to use. The value of this variable should\n#   contain the necessary JRE command-line options to specify the required GC, which\n#   will override the default of `-XX:+UseParallelGC` (example: -XX:+UseG1GC).\n# - HTTPS_PROXY: The location of the https proxy. (example: \"myuser@127.0.0.1:8080\")\n# - HTTP_PROXY: The location of the http proxy. (example: \"myuser@127.0.0.1:8080\")\n# - NO_PROXY: A comma separated lists of hosts, IP addresses or domains that can be\n#   accessed directly. (example: \"foo.example.com,bar.example.com\")\n#\n###\nFROM registry.ocp4.example.com:8443/ubi8/openjdk-17:1.14\n\nENV LANGUAGE='en_US:en'\n\n\n# We make four distinct layers so if there are application changes the library layers can be re-used\nCOPY --chown=1001 target/quarkus-app/lib/ /deployments/lib/\nCOPY --chown=1001 target/quarkus-app/*.jar /deployments/\nCOPY --chown=1001 target/quarkus-app/app/ /deployments/app/\nCOPY --chown=1001 target/quarkus-app/quarkus/ /deployments/quarkus/\n\nEXPOSE 8080\nUSER 1001\nENV JAVA_OPTS=\"-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager\"\nENV JAVA_APP_JAR=\"/deployments/quarkus-run.jar\"\n\n"
     },
     "strategy" : {
-      "sourceStrategy" : {
-        "from" : {
-          "kind" : "ImageStreamTag",
-          "name" : "openjdk-17:1.14"
-        }
-      }
+      "dockerStrategy" : { }
     }
   }
 },{
-  "apiVersion" : "apps.openshift.io/v1",
-  "kind" : "DeploymentConfig",
+  "apiVersion" : "apps/v1",
+  "kind" : "Deployment",
   "metadata" : {
     "annotations" : {
       "app.openshift.io/vcs-url" : "<<unknown>>",
-      "app.quarkus.io/commit-id" : "58dc8ed3d14eec66ff6366f71e7a8551c21a69b3",
-      "app.quarkus.io/build-timestamp" : "2023-12-18 - 14:12:19 +0000",
+      "app.quarkus.io/commit-id" : "5c7857fc5fb761c7a71d7ba310c2141a12509195",
+      "app.quarkus.io/build-timestamp" : "2024-01-04 - 14:13:40 +0000",
       "prometheus.io/scrape" : "true",
       "prometheus.io/path" : "/q/metrics",
       "prometheus.io/port" : "8080",
       "prometheus.io/scheme" : "http"
     },
     "labels" : {
-      "app.kubernetes.io/name" : "expense-service",
       "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+      "app.kubernetes.io/name" : "expense-service",
       "app.openshift.io/runtime" : "quarkus"
     },
     "name" : "expense-service"
@@ -118,15 +113,17 @@
   "spec" : {
     "replicas" : 1,
     "selector" : {
-      "app.kubernetes.io/name" : "expense-service",
-      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+      "matchLabels" : {
+        "app.kubernetes.io/name" : "expense-service",
+        "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+      }
     },
     "template" : {
       "metadata" : {
         "annotations" : {
           "app.openshift.io/vcs-url" : "<<unknown>>",
-          "app.quarkus.io/commit-id" : "58dc8ed3d14eec66ff6366f71e7a8551c21a69b3",
-          "app.quarkus.io/build-timestamp" : "2023-12-18 - 14:12:19 +0000",
+          "app.quarkus.io/commit-id" : "5c7857fc5fb761c7a71d7ba310c2141a12509195",
+          "app.quarkus.io/build-timestamp" : "2024-01-04 - 14:13:40 +0000",
           "prometheus.io/scrape" : "true",
           "prometheus.io/path" : "/q/metrics",
           "prometheus.io/port" : "8080",
@@ -140,18 +137,7 @@
       },
       "spec" : {
         "containers" : [ {
-          "env" : [ {
-            "name" : "KUBERNETES_NAMESPACE",
-            "valueFrom" : {
-              "fieldRef" : {
-                "fieldPath" : "metadata.namespace"
-              }
-            }
-          }, {
-            "name" : "JAVA_APP_JAR",
-            "value" : "/deployments/quarkus-run.jar"
-          } ],
-          "image" : "student/expense-service:1.0.0-SNAPSHOT",
+          "image" : "image-registry.openshift-image-registry.svc:5000/deploy-source/expense-service:1.0.0-SNAPSHOT",
           "imagePullPolicy" : "Always",
           "name" : "expense-service",
           "ports" : [ {
@@ -161,17 +147,6 @@
           } ]
         } ]
       }
-    },
-    "triggers" : [ {
-      "imageChangeParams" : {
-        "automatic" : true,
-        "containerNames" : [ "expense-service" ],
-        "from" : {
-          "kind" : "ImageStreamTag",
-          "name" : "expense-service:1.0.0-SNAPSHOT"
-        }
-      },
-      "type" : "ImageChange"
-    } ]
+    }
   }
 }]
